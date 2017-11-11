@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import * as giphyActions  	from '..//actions/giphyActions';
 import { connect } 			from 'react-redux';
+import PropTypes  			from 'prop-types';
 
-const GifsDisplay = ({gifs}) => {
-	console.log('%c GIFS: ', 'background:beige', gifs);
-	return <p>gifs</p>
+const Gifs = ({gifs, isGifLoading}) => {
+	console.log('%c gifs: ', 'background:beige', gifs);
+	var url = null;
+	if(!isGifLoading && gifs.length === 0){
+		return <h1>LOADING</h1>
+	} else {
+		const results = gifs.map( gif => {
+			 url = "https://i." + gif.images['fixed_height_still'].url.substring(15)
+	  		return <img key={gif.id} src={url} />	
+		})
+
+		return results;
+	}
 }
 
 class GiphyContainer extends Component{
@@ -12,23 +23,11 @@ class GiphyContainer extends Component{
 		this.props.fetchGifs();
 	}
 
-	_renderGifs(){
-		var url = null;
-		if(!this.props.isGifLoading && this.props.gifs.length === 0){
-			return <h1>LOADING</h1>
-		} else {
-			return this.props.gifs.map( gif => {
-				 url = "https://i." + gif.images['fixed_height_still'].url.slice(15)
-		  		return <img key={gif.id} src={url} />	
-			})
-		}
-	}
-
 	render(){
 		return (
 			<div>
 				<h1>GIPHY</h1>
-				{ this._renderGifs() }
+				<Gifs {...this.props} />
 			</div>
 		)
 	}
@@ -49,3 +48,8 @@ const mapDispatchProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchProps)(GiphyContainer);
+
+
+GiphyContainer.propTypes = {
+  GiphyContainer: PropTypes.array,
+};
