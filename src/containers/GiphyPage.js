@@ -13,14 +13,14 @@ class GiphyContainer extends Component{
 	}
 
 	_renderGifs(){
+		var url = null;
 		if(!this.props.isGifLoading && this.props.gifs.length === 0){
 			return <h1>LOADING</h1>
 		} else {
-			console.log('gifs: ', this.props.gifs[0].images['480w_still'].url)
-
-		  //return <img src={this.props.gifs[0].https://gph.is/1K8mLbF} />
-		  //return <img src="https://i.ytimg.com/vi/X0qwQqwKLlM/mqdefault.jpg" />
-		  return <img src="https://media4.giphy.com/media/piKXr2hEDsO1G/480w_s.jpg" />
+			return this.props.gifs.map( gif => {
+				 url = "https://i." + gif.images['fixed_height_still'].url.slice(15)
+		  		return <img key={gif.id} src={url} />	
+			})
 		}
 	}
 
