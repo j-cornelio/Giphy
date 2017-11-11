@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import GiphyContainer       from './containers/Giphy_Template';
+import React 				from 'react';
+import GiphyContainer       from './containers/GiphyPage';
 
 const App = () => (
    <GiphyContainer />

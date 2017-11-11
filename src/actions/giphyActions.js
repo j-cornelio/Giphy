@@ -31,7 +31,7 @@ export const fetchGifs = () => {
 export const fetchGifSuccess = (gifs) => {
   return {
     type: 'FETCH_GIF_SUCCESS',
-    gifs, // payload
+    gifs: gifs.data, // payload
   }
 };
 export const isGifLoading = (bool) => {

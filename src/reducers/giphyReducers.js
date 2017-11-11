@@ -1,10 +1,9 @@
 
 export const giphyReducer = (state=[], action) => {
-	console.log('%c action: ', 'background:beige', action);
 	switch(action.type){
 
 		case 'FETCH_GIF_SUCCESS':
-			return action;
+			return action.gifs;
 
 		default: 
 			return state;
@@ -12,8 +11,8 @@ export const giphyReducer = (state=[], action) => {
 }
 export const isGifLoading = (state=[], action) => {
 	switch(action.type){
-		case 'BOOKS_IS_LOADING':
-			return action.isBooksLoading;
+		case 'GIF_IS_LOADING':
+			return action.isGifLoading;
 			
 		default:
 			return state;
