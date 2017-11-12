@@ -4,14 +4,15 @@ import { connect } 			from 'react-redux';
 import PropTypes  			from 'prop-types';
 
 const Gifs = ({gifs, isGifLoading}) => {
-	console.log('%c gifs: ', 'background:beige', gifs);
-	var url = null;
+	//console.log('%c gifs: ', 'background:beige', gifs);
 	if(!isGifLoading && gifs.length === 0){
 		return <h1>LOADING</h1>
 	} else {
 		const results = gifs.map( gif => {
-			 url = "https://i." + gif.images['fixed_height_still'].url.substring(15)
-	  		return <img key={gif.id} src={url} />	
+		  	return <video key={gif.id} id="gif-mp4" poster={gif.images['fixed_width'].url} style={{margin:'0', padding:'0', width:'200',  height:'113'}} autoPlay="" loop="">
+	            <source src={gif.images['fixed_width'].mp4} type="video/mp4"></source>
+	            Your browser does not support the mp4 video codec.
+	        </video>
 		})
 
 		return results;
@@ -34,8 +35,6 @@ class GiphyContainer extends Component{
 }
 
 const mapStateToProps = (state) => {
-		console.log('%c state: ', 'background:lime', state);
-
 	return {
 		gifs: state.gifs
 	}

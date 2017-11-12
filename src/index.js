@@ -7,8 +7,6 @@ import registerServiceWorker 	from './registerServiceWorker';
 
 const store = configureStore();
 
-console.log('STORE: ', store.getState());
-
 ReactDOM.render(
 	<Provider store={store}>
 		<App />
